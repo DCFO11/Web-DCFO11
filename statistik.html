@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DCFO 11 - Statistik Kunjungan</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #00bcd4, #4caf50);
+      color: white;
+      padding: 20px;
+      margin: auto;
+      text-align: center;
+      max-width: 100%;
+      width: 100%;
+    }
+
+    h1, h2 {
+      text-shadow: 1px 1px 3px #0008;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+      text-align: left;
+    }
+
+    li {
+      padding: 8px 0;
+      font-size: 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    a.back {
+      color: #d0ffd6;
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: underline;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 26px;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
+
+      li {
+        font-size: 16px;
+      }
+
+      a.back {
+        font-size: 16px;
+      }
+
+      ul {
+        padding-left: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Statistik Kunjungan DCFO 11</h1>
+
+  <h2>Kunjungan Halaman Web</h2>
+  <ul id="pageVisits">Memuat data...</ul>
+
+  <h2>Klik Google Drive</h2>
+  <ul id="driveClicks">Memuat data...</ul>
+
+  <a href="index.html" class="back">← Kembali ke Beranda</a>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+  <script>
+    // Ganti dengan konfigurasi Firebase milik kamu!
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    const pageVisitsUl = document.getElementById('pageVisits');
+    const driveClicksUl = document.getElementById('driveClicks');
+
+    // Ambil data kunjungan halaman secara realtime
+    db.ref('visits').on('value', snapshot => {
+      const data = snapshot.val();
+      pageVisitsUl.innerHTML = '';
+      if (!data) {
+        pageVisitsUl.innerHTML = '<li>Belum ada data kunjungan.</li>';
+        return;
+      }
+      for (const page in data) {
+        const li = document.createElement('li');
+        li.textContent = `${page}: ${data[page]} kali dikunjungi`;
+        pageVisitsUl.appendChild(li);
+      }
+    });
+
+    // Ambil data klik Google Drive secara realtime
+    db.ref('driveClicks').on('value', snapshot => {
+      const data = snapshot.val();
+      driveClicksUl.innerHTML = '';
+      if (!data) {
+        driveClicksUl.innerHTML = '<li>Belum ada data klik.</li>';
+        return;
+      }
+      for (const folder in data) {
+        const li = document.createElement('li');
+        li.textContent = `${folder}: ${data[folder]} kali diklik`;
+        driveClicksUl.appendChild(li);
+      }
+    });
+  </script>
+
+</body>
+</html>
