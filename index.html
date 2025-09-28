@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DCFO 11 - Digital Creative Front One 11</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #00bcd4, #4caf50);
+      background-size: 200% 200%;
+      animation: gradientMove 15s ease infinite;
+      color: #ffffff;
+      scroll-behavior: smooth;
+      text-align: center;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    header {
+      position: relative;
+      height: 300px;
+      overflow: hidden;
+      padding-top: 50px;
+      background: transparent;
+      perspective: 1000px;
+    }
+
+    .logo {
+      width: 200px;
+      transition: transform 0.5s ease;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+      margin: 0 auto;
+      display: block;
+    }
+
+    header.scrolled .logo {
+      transform: scale(1.1) translateZ(20px);
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-top: 20px;
+      letter-spacing: 1.5px;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    }
+
+    nav {
+      margin: 30px 0;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      position: relative;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 18px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: all 0.4s ease;
+      box-shadow: 0 0 0 rgba(255,255,255,0);
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 3px;
+      bottom: 0;
+      left: 0;
+      background: linear-gradient(90deg, #4caf50, #00bcd4);
+      transition: width 0.4s ease;
+      border-radius: 2px;
+    }
+
+    nav a:hover {
+      color: #d0ffd6;
+      box-shadow: 0 4px 12px rgba(64,255,128,0.7);
+      transform: scale(1.1);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .content {
+      max-width: 700px;
+      margin: 40px auto 0;
+      padding: 30px 25px 40px;
+      background: rgba(255 255 255 / 0.1);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      backdrop-filter: blur(10px);
+      color: #e0ffe0;
+      text-align: left;
+      min-height: 350px;
+    }
+
+    /* Tab Buttons */
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 12px 28px;
+      background: rgba(255 255 255 / 0.15);
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #fff;
+      border: 2px solid transparent;
+      transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+      user-select: none;
+    }
+
+    .tab-btn:hover {
+      background: rgba(255 255 255 / 0.3);
+      transform: scale(1.05);
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(90deg, #4caf50, #00bcd4);
+      border-color: #00bcd4;
+      box-shadow: 0 4px 15px rgba(0, 188, 212, 0.7);
+      transform: scale(1.1);
+    }
+
+    /* Tab Content */
+    .tab-content {
+      display: none;
+      font-size: 17px;
+      line-height: 1.5;
+      color: #e0ffe0;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Google Drive Button */
+    .drive-button {
+      position: relative;
+      display: inline-block;
+      padding: 15px 50px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(270deg, #00bcd4, #4caf50, #00bcd4);
+      background-size: 600% 600%;
+      border: none;
+      border-radius: 12px;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+      animation: animateBG 8s ease infinite;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+      margin-top: 20px;
+    }
+
+    .drive-button:hover {
+      transform: scale(1.12);
+      box-shadow: 0 10px 30px rgba(0, 255, 128, 0.6);
+    }
+
+    @keyframes animateBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.15);
+      color: #ffffff;
+      font-size: 14px;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+      }
+      nav a {
+        margin: 10px 0;
+      }
+      .tabs {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .tab-btn {
+        width: 100%;
+        text-align: center;
+      }
+      .content {
+        padding: 20px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header id="header">
+    <img src="logo.png" alt="DCFO 11 Logo" class="logo" />
+    <h1>Digital Creative Front One 11</h1>
+  </header>
+
+  <nav>
+    <a href="index.html" class="active">Beranda</a>
+    <a href="tentang.html">Tentang</a>
+    <a href="statistik.html">Statistik</a>
+    <a href="kontak.html">Kontak</a>
+  </nav>
+
+  <div class="content">
+    <p>Selamat datang di ruang kerja digital kami. <br>  
+    Pilih jenis konten yang ingin Anda lihat:</p>
+
+    <div class="tabs" role="tablist" aria-label="Pilihan konten Google Drive">
+      <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="doc" id="tab-doc">Dokumentasi</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="profile" id="tab-profile">Profil Perusahaan</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="work" id="tab-work">Hasil Kerja</button>
+    </div>
+
+    <section id="doc" class="tab-content active" role="tabpanel" aria-labelledby="tab-doc">
+      <p>Berisi dokumen-dokumen penting yang mendukung aktivitas tim kami.<br>
+      Anda bisa akses file-file ini secara lengkap melalui tombol di bawah.</p>
+      <a href="https://drive.google.com/drive/folders/1hjhdj3FNqsCupiW3C05Ta3noynXE2elE?usp=drive_link" 
+         target="_blank" 
+         class="drive-button"
+         aria-label="Masuk ke Google Drive Dokumentasi DCFO 11"
+         data-folder="dokumentasi">
+         Masuk ke Google Drive Dokumentasi
+      </a>
+    </section>
+
+    <section id="profile" class="tab-content" role="tabpanel" aria-labelledby="tab-profile">
+      <p>Profil perusahaan kami yang berisi sejarah, visi, dan misi, serta struktur organisasi tim DCFO 11.</p>
+      <a href="https://drive.google.com/drive/folders/PROFIL_FOLDER_ID" 
+         target="_blank" 
+         class="drive-button"
+         aria-label="Masuk ke Google Drive Profil Perusahaan DCFO 11"
+         data-folder="profil_perusahaan">
+         Masuk ke Google Drive Profil Perusahaan
+      </a>
+    </section>
+
+    <section id="work" class="tab-content" role="tabpanel" aria-labelledby="tab-work">
+      <p>Hasil kerja tiap struktur organisasi kami, laporan, dan dokumentasi projek yang sudah selesai.</p>
+      <a href="https://drive.google.com/drive/folders/HASIL_KERJA_FOLDER_ID" 
+         target="_blank" 
+         class="drive-button"
+         aria-label="Masuk ke Google Drive Hasil Kerja DCFO 11"
+         data-folder="hasil_kerja">
+         Masuk ke Google Drive Hasil Kerja
+      </a>
+    </section>
+  </div>
+
+  <footer>
+    &copy; 2025 DCFO 11. Semua Hak Cipta Dilindungi.
+  </footer>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+  <script>
+    // ======= Konfigurasi Firebase =======
+    // Ganti dengan konfigurasi Firebase kamu
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    // Catat kunjungan halaman saat halaman dimuat
+    const page = 'beranda'; // Bisa juga 'index.html' sesuai kebutuhan
+
+    function incrementCounter(path) {
+      const ref = db.ref(path);
+      ref.transaction(current => {
+        return (current || 0) + 1;
+      }, (error, committed, snapshot) => {
+        if (error) {
+          console.error('Transaction failed: ', error);
+        } else if (!committed) {
+          console.log('Transaction not committed.');
+        } else {
+          console.log(`Counter ${path} sekarang: ${snapshot.val()}`);
+        }
+      });
+    }
+
+    // Catat kunjungan halaman
+    incrementCounter(`kunjungan/${page}`);
+
+    // Tab switching logic
+    const tabs = document.querySelectorAll('.tab-btn');
+    const contents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Reset active states
+        tabs.forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        contents.forEach(c => c.classList.remove('active'));
+
+        // Activate clicked tab and content
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        const id = tab.getAttribute('aria-controls');
+        document.getElementById(id).classList.add('active');
+      });
+    });
+
+    // Catat klik tombol Google Drive
+    const driveButtons = document.querySelectorAll('.drive-button');
+    driveButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const folder = btn.getAttribute('data-folder');
+        if(folder) {
+          incrementCounter(`klik_drive/${folder}`);
+        }
+      });
+    });
+
+    // Scroll header effect
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if(window.scrollY > 20){
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  </script>
+
+</body>
+</html>
