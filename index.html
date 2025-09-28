@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DCFO 11 - Digital Creative Front One 11</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #00bcd4, #4caf50);
+      background-size: 200% 200%;
+      animation: gradientMove 10s ease infinite;
+      color: #ffffff;
+      text-align: center;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    header {
+      padding: 40px 20px 20px;
+    }
+
+    .logo {
+      width: 200px;
+      display: block;
+      margin: 0 auto 10px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 600;
+      margin: 10px 0 0;
+      color: #ffffff;
+    }
+
+    nav {
+      margin: 30px 0;
+    }
+
+    nav a {
+      color: #ffffff;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #d0ffd6;
+    }
+
+    .content {
+      padding: 60px 20px;
+    }
+
+    .content p {
+      font-size: 16px;
+      max-width: 600px;
+      margin: 0 auto 30px;
+    }
+
+    /* Tombol Drive dengan animasi gradien berjalan */
+    .drive-button {
+      position: relative;
+      display: inline-block;
+      padding: 15px 30px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(270deg, #00bcd4, #4caf50, #00bcd4);
+      background-size: 600% 600%;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      animation: animateBG 6s ease infinite;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .drive-button:hover {
+      transform: scale(1.08);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    @keyframes animateBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    footer {
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.1);
+      color: #ffffff;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="logo.png" alt="DCFO 11 Logo" class="logo" />
+    <h1>Digital Creative Front One 11</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Beranda</a>
+    <a href="tentang.html">Tentang</a>
+    <a href="statistik.html">Statistik</a>
+    <a href="kontak.html">Kontak</a>
+  </nav>
+
+  <div class="content">
+    <p>Selamat datang di ruang kerja digital kami. Akses tools dan file kreatif tim DCFO 11 dengan tombol di bawah ini.</p>
+
+    <a href="https://drive.google.com/drive/folders/1hjhdj3FNqsCupiW3C05Ta3noynXE2elE?usp=drive_link"
+       target="_blank"
+       class="drive-button">
+       Masuk ke Google Drive
+    </a>
+  </div>
+
+  <footer>
+    &copy; 2025 DCFO 11. Semua Hak Cipta Dilindungi.
+  </footer>
+
+</body>
+</html>
