@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DCFO 11 - Digital Creative Front One 11</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #00bcd4, #4caf50);
+      background-size: 200% 200%;
+      animation: gradientMove 15s ease infinite;
+      color: #ffffff;
+      scroll-behavior: smooth;
+      text-align: center;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    header {
+      position: relative;
+      height: 300px;
+      overflow: hidden;
+      padding-top: 10px;
+      background: transparent;
+      perspective: 1000px;
+    }
+
+    .logo {
+      width: 220px;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+      margin: 0 auto;
+      display: block;
+      transition: transform 0.5s ease;
+      transform-origin: center;
+    }
+
+    header.scrolled .logo {
+      transform: scale(1.1) translateZ(20px);
+    }
+
+    .logo.load-animate {
+      animation: logoScaleUp 1.2s ease forwards;
+    }
+
+    @keyframes logoScaleUp {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-top: 20px;
+      letter-spacing: 1.5px;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    }
+
+    .motto {
+      font-size: 18px;
+      font-style: italic;
+      margin-top: 8px;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+      color: #d0ffd6;
+    }
+
+    nav {
+      margin: 30px 0;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      position: relative;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 18px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: all 0.4s ease;
+      box-shadow: 0 0 0 rgba(255,255,255,0);
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 3px;
+      bottom: 0;
+      left: 0;
+      background: linear-gradient(90deg, #4caf50, #00bcd4);
+      transition: width 0.4s ease;
+      border-radius: 2px;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: #d0ffd6;
+      box-shadow: 0 4px 12px rgba(64,255,128,0.7);
+      transform: scale(1.1);
+    }
+
+    nav a:hover::after,
+    nav a.active::after {
+      width: 100%;
+    }
+
+    .content {
+      max-width: 700px;
+      margin: 40px auto 0;
+      padding: 30px 25px 40px;
+      background: rgba(255 255 255 / 0.1);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      backdrop-filter: blur(10px);
+      color: #e0ffe0;
+      text-align: left;
+      min-height: 350px;
+      transition: box-shadow 0.5s ease, transform 0.5s ease;
+    }
+
+    .content.hover-active {
+      box-shadow: 0 15px 40px rgba(0, 255, 128, 0.7);
+      transform: scale(1.05);
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 12px 28px;
+      background: rgba(255 255 255 / 0.15);
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #fff;
+      border: 2px solid transparent;
+      transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+      user-select: none;
+    }
+
+    .tab-btn:hover {
+      background: rgba(255 255 255 / 0.3);
+      transform: scale(1.05);
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(90deg, #4caf50, #00bcd4);
+      border-color: #00bcd4;
+      box-shadow: 0 4px 15px rgba(0, 188, 212, 0.7);
+      transform: scale(1.1);
+    }
+
+    .tab-content {
+      display: none;
+      font-size: 17px;
+      line-height: 1.5;
+      color: #e0ffe0;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .drive-button {
+      position: relative;
+      display: inline-block;
+      padding: 15px 50px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(270deg, #00bcd4, #4caf50, #00bcd4);
+      background-size: 600% 600%;
+      border: none;
+      border-radius: 12px;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+      animation: animateBG 8s ease infinite;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+      margin-top: 20px;
+    }
+
+    .drive-button:hover {
+      transform: scale(1.12);
+      box-shadow: 0 10px 30px rgba(0, 255, 128, 0.6);
+    }
+
+    @keyframes animateBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.15);
+      color: #ffffff;
+      font-size: 14px;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+
+    /* Responsif Mobile */
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+      }
+      nav a {
+        margin: 10px 0;
+      }
+      .tabs {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .tab-btn {
+        width: 100%;
+        text-align: center;
+      }
+      .content {
+        padding: 20px 15px;
+      }
+      .logo {
+        width: 150px;
+      }
+      h1 {
+        font-size: 24px;
+      }
+      .motto {
+        font-size: 15px;
+      }
+      .drive-button {
+        width: 100%;
+        padding: 14px;
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header id="header">
+    <img src="logo.png" alt="DCFO 11 Logo" class="logo" />
+    <h1>Digital Creative Front One 11</h1>
+    <p class="motto">Langkah Media - Satu Konten, Seribu Perhatian.</p>
+  </header>
+
+  <nav>
+    <a href="index.html" class="active" aria-current="page">Beranda</a>
+    <a href="tentang.html">Tentang</a>
+    <a href="statistik.html">Statistik</a>
+    <a href="kontak.html">Kontak</a>
+  </nav>
+
+  <div class="content">
+    <p>Selamat datang di ruang kerja digital kami. <br>  
+    Pilih jenis konten yang ingin Anda lihat:</p>
+
+    <div class="tabs" role="tablist" aria-label="Pilihan konten Google Drive">
+      <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="guest" id="tab-guest">Buku Tamu</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="doc" id="tab-doc">Dokumentasi</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="profile" id="tab-profile">Profil Perusahaan</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="work" id="tab-work">Hasil Kerja</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="all" id="tab-all">Semua</button>
+    </div>
+
+    <section id="guest" class="tab-content active" role="tabpanel" aria-labelledby="tab-guest">
+      <p>Selamat datang di Website DCFO 11<br>
+      pengunjung harap mengisi buku tamu yang mengunjungi website ini, terima kasih</p>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeGJIN89vgfVfC9WO2vbKSWGcwFDYn8vxSoaHydVz9QQA52lg/viewform"
+         target="_blank"
+         class="drive-button"
+         aria-label="Masuk ke Google Form Buku Tamu DCFO 11"
+         data-folder="buku_tamu">
+         Isi Buku Tamu
+      </a>
+    </section>
+
+    <section id="doc" class="tab-content" role="tabpanel" aria-labelledby="tab-doc">
+      <p>Berisi dokumentasi-dokumentasi dari aktivitas tim kami.</p>
+      <a href="https://drive.google.com/drive/folders/1N1E_zwopihhHgi6m0FV6JIW3IHNXLUVg?usp=drive_link" 
+         target="_blank" 
+         class="drive-button"
+         aria-label="Masuk ke Google Drive Dokumentasi DCFO 11"
+         data-folder="dokumentasi">
+         Masuk ke Google Drive Dokumentasi
+      </a>
+    </section>
+
+    <section id="profile" class="tab-content" role="tabpanel" aria-labelledby="tab-profile">
+      <p>Profil perusahaan kami yang berisi informasi tim serta struktur organisasi tim DCFO 11.</p>
+      <a href="https://drive.google.com/drive/folders/1pkMQQRexaJ4jtfXw6mdBpnf2WBZp87im?usp=drive_link" 
+         target="_blank" 
+         class="drive-button"
+         aria-label="Masuk ke Google Drive Profil Perusahaan DCFO 11"
+         data-folder="profil_perusahaan">
+         Masuk ke Google Drive Profil Perusahaan
+      </a>
+    </section>
+
+    <section id="work" class="tab-content" role="tabpanel" aria-labelledby="tab-work">
+      <p>Hasil kerja tiap struktur organisasi kami, laporan, dan dokumentasi projek yang sudah selesai.</p>
+      <a href="https://drive.google.com/drive/folders/18xV003OJNsED6q4KmDGHbq7H7enjk1Yg?usp=drive_link" 
+         target="_blank" 
+         class="drive-button"
+         aria-label="Masuk ke Google Drive Hasil Kerja DCFO 11"
+         data-folder="hasil_kerja">
+         Masuk ke Google Drive Hasil Kerja
+      </a>
+    </section>
+
+    <section id="all" class="tab-content" role="tabpanel" aria-labelledby="tab-all">
+      <h3>Keseluruhan Kegiatan DCFO 11</h3>
+      <p>Untuk melihat semua dokumen, profil, dan hasil kerja dari perusahaan DCFO 11 secara lengkap, silakan akses folder Google Drive kami berikut:</p>
+      <a href="https://drive.google.com/drive/folders/1hjhdj3FNqsCupiW3C05Ta3noynXE2elE?usp=drive_link"
+         target="_blank"
+         class="drive-button"
+         aria-label="Masuk ke Google Drive DCFO 11 - Semua Kegiatan"
+         data-folder="semua">
+         Masuk ke Google Drive DCFO 11
+      </a>
+    </section>
+  </div>
+
+  <footer>
+    &copy; 2025 DCFO 11 Copyright
+  </footer>
+
+  <script>
+    // Tab Switching
+    const tabs = document.querySelectorAll('.tab-btn');
+    const contents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        contents.forEach(c => c.classList.remove('active'));
+
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        const id = tab.getAttribute('aria-controls');
+        document.getElementById(id).classList.add('active');
+      });
+    });
+
+    // Efek Logo Saat Scroll
+    const header = document.getElementById('header');
+    const logo = header.querySelector('.logo');
+
+    window.addEventListener('scroll', () => {
+      if(window.scrollY > 10) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Efek Hover Awal Halaman Load
+    window.addEventListener('load', () => {
+      logo.classList.add('load-animate');
+      const content = document.querySelector('.content');
+      content.classList.add('hover-active');
+
+      setTimeout(() => {
+        content.classList.remove('hover-active');
+      }, 1700);
+    });
+  </script>
+</body>
+</html>
